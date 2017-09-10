@@ -198,12 +198,13 @@ void setup() {
     #if THERMOSTAT_DISPLAY_SUPPORT
         displaySetup();
     #endif
-
+    #if ENABLE_AC
+        acSetup();
+    #endif
 
     // 3rd party code hook
     #if USE_EXTRA
         extraSetup();
-    #endif
 
     // Prepare configuration for version 2.0
     migrate();
@@ -218,5 +219,4 @@ void loop() {
     for (unsigned char i = 0; i < _loop_callbacks.size(); i++) {
         (_loop_callbacks[i])();
     }
-
 }

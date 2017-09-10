@@ -893,6 +893,15 @@
 #define EZOPH_SYNC_INTERVAL          1000    // Amount of time (in ms) sync new readings.
 #endif
 
+//------------------------------------------------------------------------------
+// A/C control
+// Enable support by passing ENABLE_AC=1 build flag
+//------------------------------------------------------------------------------
+
+#ifndef AC_UPDATE_INTERVAL
+#define AC_UPDATE_INTERVAL  (60*1000)
+#endif
+
 // =============================================================================
 // Sensor helpers configuration - can't move to dependencies.h
 // =============================================================================
