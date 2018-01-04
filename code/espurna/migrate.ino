@@ -563,6 +563,14 @@ void migrate() {
             setSetting("chLogic", 4, 0);
             setSetting("relays", 1);
 
+
+    #elif defined(ESPURNA_AC)
+        setSetting("board", 25);
+        setSetting("irLedGPIO", 5, 1);
+        setSetting("irLedLogic", 1, 1);
+        setSetting("irSenseGPIO", 2, 1);
+        setSetting("irSenseLogic", 1, 1);
+
         #elif defined(XENON_SM_PW702U)
 
             setSetting("board", 44);

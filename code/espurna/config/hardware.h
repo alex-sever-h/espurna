@@ -231,6 +231,21 @@
     #define THINGSPEAK_SUPPORT          0
 
 // -----------------------------------------------------------------------------
+// ESPurna A/C
+// -----------------------------------------------------------------------------
+
+#elif defined(ESPURNA_AC)
+
+    #define MANUFACTURER        "ALSEH"
+    #define DEVICE              "ESPURNA_AC"
+    #define ENABLE_AC           1
+
+    // Disable non-core modules
+    #define ALEXA_SUPPORT           0
+    #define DOMOTICZ_SUPPORT        0
+    #define THINGSPEAK_SUPPORT      0
+
+// -----------------------------------------------------------------------------
 // Itead Studio boards
 // -----------------------------------------------------------------------------
 

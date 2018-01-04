@@ -367,6 +367,15 @@
 #define HLW8012_SEL_PIN                 5
 #endif
 
+// A/C control
+// Enable support by passing ENABLE_AC=1 build flag
+//--------------------------------------------------------------------------------
+
+#define AC_UPDATE_INTERVAL  (60*1000)
+
+#if ENABLE_AC
+#endif
+
 #ifndef HLW8012_CF1_PIN
 #define HLW8012_CF1_PIN                 13
 #endif

@@ -156,6 +156,9 @@ void setup() {
     #if DOMOTICZ_SUPPORT
         domoticzSetup();
     #endif
+    #if ENABLE_AC
+        acSetup();
+    #endif
     #if HOMEASSISTANT_SUPPORT
         haSetup();
     #endif

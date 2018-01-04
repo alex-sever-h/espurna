@@ -725,6 +725,17 @@
 
 #define MQTT_MESSAGE_ID_SHIFT       1000        // Store MQTT message id into EEPROM every these many
 
+
+#define MQTT_TOPIC_AC           "ac"
+
+// Internal MQTT events (do not change)
+#define MQTT_CONNECT_EVENT      0
+#define MQTT_DISCONNECT_EVENT   1
+#define MQTT_MESSAGE_EVENT      2
+
+#define MQTT_MESSAGE_ID_SHIFT   1000        // Store MQTT message id into EEPROM every these many
+
+
 // Custom get and set postfixes
 // Use something like "/status" or "/set", with leading slash
 // Since 1.9.0 the default value is "" for getter and "/set" for setter
