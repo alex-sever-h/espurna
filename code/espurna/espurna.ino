@@ -205,6 +205,7 @@ void setup() {
     // 3rd party code hook
     #if USE_EXTRA
         extraSetup();
+    #endif
 
     // Prepare configuration for version 2.0
     migrate();

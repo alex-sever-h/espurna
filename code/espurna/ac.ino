@@ -38,6 +38,9 @@ void acLoopDo()
             mqttSend(getSetting("acTopic", MQTT_TOPIC_AC).c_str(),
                      prop.c_str(), "choices", jt->c_str());
         }
+
+        String result = iryamato.get(prop.c_str());
+        mqttSend(prop.c_str(), result.c_str());
     }
 #if 0
     // Update websocket clients
@@ -61,39 +64,37 @@ void acMQTTCallback(unsigned int type, const char * topic, const char * payload)
 
     if (type == MQTT_MESSAGE_EVENT) {
 
-        DEBUG_MSG_P(PSTR("Received topic %s payload %s\n"), topic, payload)
+      // Match topic
+      String t = mqttMagnitude((char *) topic);
+      if (!t.startsWith(MQTT_TOPIC_AC)) return;
 
-;
+      DEBUG_MSG_P(PSTR("Received topic %s payload %s\n"), t.c_str(), payload);
 
-        // Match topic
-        String t = mqttSubtopic((char *) topic);
-        if (!t.startsWith(MQTT_TOPIC_AC)) return;
+      String acFunc = t.substring(strlen(MQTT_TOPIC_AC) + 1);
+      String acCommand = String(payload);
 
-        String acFunc = t.substring(strlen(MQTT_TOPIC_AC) + 1);
-        String acCommand = String(payload);
+      Serial.println("Function " + acFunc + " command " + acCommand );
 
-        Serial.println("Function " + acFunc + " command " + acCommand );
+      bool isSet = iryamato.set(acFunc, acCommand);
 
-        iryamato.set(acFunc, acCommand);
+      String result = iryamato.get(acFunc);
+
+      mqttSend(acFunc.c_str(), result.c_str());
+
+      DEBUG_MSG_P(PSTR("set is %d\n"), isSet);
     }
 
 }
 
-void acSetupMQTT() {
-    mqttRegister(acMQTTCallback);
-}
-
 void acSetup() {
 
-    apiRegister(MQTT_TOPIC_AC, MQTT_TOPIC_AC, [](char * buffer, size_t len) {
-        "";
-    });
-
-    acSetupMQTT();
+#if MQTT_SUPPORT
+  mqttRegister(acMQTTCallback);
+#endif
 
     // Main callbacks
     espurnaRegisterLoop(acLoop);
-    #espurnaRegisterReload([]() { _ntp_configure = true; });
+    //espurnaRegisterReload([]() { _ntp_configure = true; });
 
 }
 
